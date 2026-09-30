@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hemora | Register Donor</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: #fff6f8;
+            color: #35151d;
+        }
+
+        .navbar {
+            padding: 17px 5%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 5px 25px rgba(100,10,30,0.06);
+        }
+
+        .navbar-brand {
+            color: #c9184a !important;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .nav-link {
+            color: #4b3038 !important;
+            font-weight: 600;
+            font-size: 14px;
+            margin: 0 6px;
+        }
+
+        .nav-link:hover {
+            color: #c9184a !important;
+        }
+
+        .logout-btn {
+            border: none;
+            background: #c9184a;
+            color: white;
+            padding: 9px 18px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 65px 20px 50px;
+
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    #ffdce5,
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #fff4f6,
+                    #ffe3e9
+                );
+        }
+
+        .hero-icon {
+            width: 70px;
+            height: 70px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin: 0 auto 18px;
+
+            border-radius: 22px;
+
+            background: #c9184a;
+            color: white;
+
+            font-size: 30px;
+
+            box-shadow: 0 12px 30px rgba(201,24,74,0.25);
+        }
+
+        .hero h1 {
+            font-size: 45px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 span {
+            color: #c9184a;
+            font-family: "DM Serif Display", serif;
+            font-style: italic;
+        }
+
+        .hero p {
+            color: #80656e;
+            max-width: 650px;
+            margin: auto;
+        }
+
+        .form-section {
+            padding: 55px 7%;
+        }
+
+        .form-card {
+            max-width: 950px;
+            margin: auto;
+
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 25px;
+
+            box-shadow:
+                0 18px 45px rgba(80,10,30,0.08);
+
+            border: 1px solid #f2dce1;
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .form-title h2 {
+            font-weight: 800;
+            font-size: 28px;
+        }
+
+        .form-title p {
+            color: #80656e;
+            font-size: 14px;
+        }
+
+        .form-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: #4b3038;
+            margin-bottom: 8px;
+        }
+
+        .form-control,
+        .form-select {
+            min-height: 48px;
+
+            border: 1px solid #ead3d9;
+
+            border-radius: 11px;
+
+            font-family: "Poppins", sans-serif;
+
+            font-size: 13px;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #c9184a;
+
+            box-shadow:
+                0 0 0 3px rgba(201,24,74,0.08);
+        }
+
+        .submit-btn {
+            width: 100%;
+
+            margin-top: 30px;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #bd1236,
+                    #ef4665
+                );
+
+            color: white;
+
+            font-size: 15px;
+            font-weight: 700;
+
+            box-shadow:
+                0 12px 28px rgba(189,18,54,0.22);
+
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 17px 35px rgba(189,18,54,0.3);
+        }
+
+        .message {
+            display: none;
+
+            padding: 13px 15px;
+
+            border-radius: 10px;
+
+            margin-bottom: 20px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+        .message.success {
+            display: block;
+
+            background: #e8f8ef;
+            color: #18733d;
+
+            border: 1px solid #bce8cd;
+        }
+
+        .message.error {
+            display: block;
+
+            background: #fff0f2;
+            color: #b31335;
+
+            border: 1px solid #f2c5cf;
+        }
+
+        .back-link {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #c9184a;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            color: #9f0c2c;
+        }
+
+        footer {
+            background: #24171a;
+            color: white;
+
+            text-align: center;
+
+            padding: 35px 20px;
+        }
+
+        footer h4 {
+            font-weight: 800;
+        }
+
+        footer h4 i {
+            color: #ff4d6d;
+        }
+
+        footer p {
+            color: #bbaeb1;
+            font-size: 13px;
+            margin: 6px;
+        }
+
+        @media(max-width:768px) {
+
+            .form-card {
+                padding: 25px 20px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar navbar-expand-lg">
+
+    <div class="container-fluid">
+
+        <a
+            class="navbar-brand"
+            href="dashboard.html">
+
+            <i class="bi bi-droplet-fill"></i>
+            Hemora
+
+        </a>
+
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#menu">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <div
+            class="collapse navbar-collapse"
+            id="menu">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="dashboard.html">
+
+                        Dashboard
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="availability.html">
+
+                        Blood Availability
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="request.html">
+
+                        Request Blood
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="donors.html">
+
+                        Registered Donors
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="history.html">
+
+                        History
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-icon">
+
+        <i class="bi bi-heart-pulse-fill"></i>
+
+    </div>
+
+
+    <h1>
+        Register as a <span>Donor</span>
+    </h1>
+
+
+    <p>
+
+        Become a blood donor and help someone
+        when they need it most.
+
+    </p>
+
+</section>
+
+
+<!-- FORM -->
+
+<section class="form-section">
+
+    <div class="form-card">
+
+
+        <div class="form-title">
+
+            <h2>
+                Donor Registration
+            </h2>
+
+            <p>
+                Enter the donor details below.
+            </p>
+
+        </div>
+
+
+        <div
+            id="message"
+            class="message">
+        </div>
+
+
+        <form id="donorForm">
+
+
+            <div class="row g-4">
+
+
+                <!-- NAME -->
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+                        Full Name *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        class="form-control"
+                        placeholder="Enter full name"
+                        required>
+
+                </div>
+
+
+                <!-- AGE -->
+
+                <div class="col-md-3">
+
+                    <label class="form-label">
+                        Age *
+                    </label>
+
+                    <input
+                        type="number"
+                        id="age"
+                        class="form-control"
+                        min="18"
+                        max="65"
+                        placeholder="Age"
+                        required>
+
+                </div>
+
+
+                <!-- GENDER -->
+
+                <div class="col-md-3">
+
+                    <label class="form-label">
+                        Gender *
+                    </label>
+
+                    <select
+                        id="gender"
+                        class="form-select"
+                        required>
+
+                        <option value="">
+                            Select
+                        </option>
+
+                        <option value="Male">
+                            Male
+                        </option>
+
+                        <option value="Female">
+                            Female
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- BLOOD GROUP -->
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+                        Blood Group *
+                    </label>
+
+                    <select
+                        id="blood_group"
+                        class="form-select"
+                        required>
+
+                        <option value="">
+                            Select blood group
+                        </option>
+
+                        <option value="A+">
+                            A+
+                        </option>
+
+                        <option value="A-">
+                            A-
+                        </option>
+
+                        <option value="B+">
+                            B+
+                        </option>
+
+                        <option value="B-">
+                            B-
+                        </option>
+
+                        <option value="AB+">
+                            AB+
+                        </option>
+
+                        <option value="AB-">
+                            AB-
+                        </option>
+
+                        <option value="O+">
+                            O+
+                        </option>
+
+                        <option value="O-">
+                            O-
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+                        Phone Number *
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        class="form-control"
+                        placeholder="Enter phone number"
+                        required>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+                        Email *
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        class="form-control"
+                        placeholder="Enter email"
+                        required>
+
+                </div>
+
+
+                <!-- USERNAME -->
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+                        Username *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        class="form-control"
+                        placeholder="Create username"
+                        required>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+                        Password *
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        class="form-control"
+                        placeholder="Create password"
+                        required>
+
+                </div>
+
+
+                <!-- ADDRESS -->
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+                        Address *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="address"
+                        class="form-control"
+                        placeholder="Enter address"
+                        required>
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-btn">
+
+                <i class="bi bi-person-plus-fill"></i>
+
+                Register Donor
+
+            </button>
+
+
+        </form>
+
+
+        <a
+            href="donors.html"
+            class="back-link">
+
+            <i class="bi bi-arrow-left"></i>
+
+            Back to Registered Donors
+
+        </a>
+
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h4>
+
+        <i class="bi bi-droplet-fill"></i>
+
+        Hemora
+
+    </h4>
+
+    <p>
+        Blood Donation Management System
+    </p>
+
+    <p>
+        © 2026 Hemora. Every Drop Can Save a Life.
+    </p>
+
+</footer>
+
+
+<script>
+
+
+document
+    .getElementById("donorForm")
+    .addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+
+            const message =
+                document.getElementById(
+                    "message"
+                );
+
+
+            message.style.display = "none";
+
+
+            const donorData = {
+
+                name:
+                    document
+                        .getElementById("name")
+                        .value
+                        .trim(),
+
+                age:
+                    document
+                        .getElementById("age")
+                        .value,
+
+                gender:
+                    document
+                        .getElementById("gender")
+                        .value,
+
+                blood_group:
+                    document
+                        .getElementById("blood_group")
+                        .value,
+
+                phone:
+                    document
+                        .getElementById("phone")
+                        .value
+                        .trim(),
+
+                email:
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim(),
+
+                address:
+                    document
+                        .getElementById("address")
+                        .value
+                        .trim(),
+
+                username:
+                    document
+                        .getElementById("username")
+                        .value
+                        .trim(),
+
+                password:
+                    document
+                        .getElementById("password")
+                        .value
+
+            };
+
+
+            try {
+
+
+                const response =
+                    await fetch(
+                        "/api/donors",
+                        {
+
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify(
+                                    donorData
+                                )
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (response.ok && data.success) {
+
+
+                    message.textContent =
+                        "Donor registered successfully!";
+
+                    message.className =
+                        "message success";
+
+
+                    document
+                        .getElementById("donorForm")
+                        .reset();
+
+
+                    setTimeout(
+                        function() {
+
+                            window.location.href =
+                                "donors.html";
+
+                        },
+                        1200
+                    );
+
+
+                } else {
+
+
+                    message.textContent =
+                        data.message ||
+                        "Donor registration failed.";
+
+                    message.className =
+                        "message error";
+
+
+                }
+
+
+            } catch(error) {
+
+
+                console.error(
+                    "Registration error:",
+                    error
+                );
+
+
+                message.textContent =
+                    "Unable to connect to server. Please make sure Node.js is running.";
+
+                message.className =
+                    "message error";
+
+
+            }
+
+        }
+    );
+
+
+</script>
+
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+</body>
+
+</html>

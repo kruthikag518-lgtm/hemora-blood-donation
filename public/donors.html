@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hemora | Registered Donors</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: #fff6f8;
+            color: #35151d;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            padding: 17px 5%;
+            background: rgba(255,255,255,0.94);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 5px 25px rgba(100,10,30,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            color: #c9184a !important;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .nav-link {
+            color: #4b3038 !important;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0 6px;
+        }
+
+        .nav-link:hover {
+            color: #c9184a !important;
+        }
+
+        .logout-btn {
+            border: none;
+            background: #c9184a;
+            color: white;
+            padding: 9px 18px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        /* HEADER */
+
+        .page-header {
+            padding: 70px 7% 45px;
+            text-align: center;
+            background:
+                radial-gradient(circle at 20% 20%, #ffdce5, transparent 30%),
+                linear-gradient(135deg, #fff4f6, #ffe3e9);
+        }
+
+        .page-header h1 {
+            font-size: clamp(35px, 5vw, 55px);
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .page-header h1 span {
+            color: #c9184a;
+            font-family: "DM Serif Display", serif;
+            font-style: italic;
+        }
+
+        .page-header p {
+            color: #80656e;
+            margin: 0;
+        }
+
+        /* MAIN */
+
+        .main-section {
+            padding: 55px 6%;
+        }
+
+        .directory-card {
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(80,10,30,0.07);
+            border: 1px solid #f4dfe4;
+        }
+
+        .directory-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .directory-header h2 {
+            font-size: 25px;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .directory-header p {
+            color: #80656e;
+            font-size: 13px;
+            margin: 5px 0 0;
+        }
+
+        /* REGISTER BUTTON */
+
+        .register-btn {
+            border: none;
+            text-decoration: none;
+            background: linear-gradient(135deg, #bd1236, #ef4665);
+            color: white;
+            padding: 13px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            box-shadow: 0 10px 25px rgba(189,18,54,0.20);
+            transition: 0.3s;
+        }
+
+        .register-btn:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(189,18,54,0.28);
+        }
+
+        /* SEARCH */
+
+        .search-box {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 14px;
+            color: #c9184a;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 15px 12px 43px;
+            border: 1px solid #f0d5dc;
+            border-radius: 12px;
+            outline: none;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .search-box input:focus {
+            border-color: #c9184a;
+            box-shadow: 0 0 0 3px rgba(201,24,74,0.08);
+        }
+
+        /* TABLE */
+
+        .table-container {
+            overflow-x: auto;
+            border-radius: 15px;
+        }
+
+        table {
+            width: 100%;
+            min-width: 1000px;
+            border-collapse: collapse;
+        }
+
+        thead th {
+            background: #fff0f3;
+            color: #9f0c2c;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 15px;
+            white-space: nowrap;
+        }
+
+        tbody td {
+            padding: 15px;
+            font-size: 13px;
+            color: #5f4850;
+            border-bottom: 1px solid #f4e6e9;
+            vertical-align: middle;
+        }
+
+        tbody tr {
+            transition: 0.2s;
+        }
+
+        tbody tr:hover {
+            background: #fff9fa;
+        }
+
+        .id-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 34px;
+            height: 34px;
+
+            border-radius: 50%;
+
+            background: #fff0f3;
+            color: #c9184a;
+
+            font-weight: 700;
+        }
+
+        .blood-badge {
+            display: inline-block;
+
+            padding: 6px 11px;
+
+            border-radius: 20px;
+
+            background: #c9184a;
+            color: white;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* EMPTY */
+
+        .empty-message {
+            text-align: center;
+            padding: 45px 20px;
+            color: #80656e;
+        }
+
+        .empty-message i {
+            font-size: 45px;
+            color: #e0a4b3;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        /* LOADING */
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #80656e;
+        }
+
+        .spinner-border {
+            color: #c9184a !important;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #24171a;
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+            margin-top: 30px;
+        }
+
+        footer h4 {
+            font-weight: 800;
+        }
+
+        footer h4 i {
+            color: #ff4d6d;
+        }
+
+        footer p {
+            color: #bbaeb1;
+            font-size: 13px;
+            margin: 6px;
+        }
+
+        @media(max-width:768px) {
+
+            .main-section {
+                padding: 35px 4%;
+            }
+
+            .directory-card {
+                padding: 20px;
+            }
+
+            .directory-header {
+                align-items: stretch;
+            }
+
+            .register-btn {
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar navbar-expand-lg">
+
+    <div class="container-fluid">
+
+        <a
+            class="navbar-brand"
+            href="dashboard.html">
+
+            <i class="bi bi-droplet-fill"></i>
+            Hemora
+
+        </a>
+
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarMenu">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <div
+            class="collapse navbar-collapse"
+            id="navbarMenu">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="dashboard.html">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="availability.html">
+                        Blood Availability
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="request.html">
+                        Request Blood
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="donors.html">
+                        Donors
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="history.html">
+                        History
+                    </a>
+                </li>
+
+                <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+
+                    <button
+                        class="logout-btn"
+                        onclick="logout()">
+
+                        <i class="bi bi-box-arrow-right"></i>
+                        Logout
+
+                    </button>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- HEADER -->
+
+<section class="page-header">
+
+    <h1>
+        Registered <span>Donors</span>
+    </h1>
+
+    <p>
+        Find registered blood donors and their blood groups.
+    </p>
+
+</section>
+
+
+<!-- MAIN -->
+
+<section class="main-section">
+
+    <div class="directory-card">
+
+
+        <div class="directory-header">
+
+            <div>
+
+                <h2>
+                    <i
+                        class="bi bi-people-fill"
+                        style="color:#c9184a;">
+                    </i>
+
+                    Donor Directory
+                </h2>
+
+                <p>
+                    Registered donors from Hemora database
+                </p>
+
+            </div>
+
+
+            <!-- REGISTER NEW DONOR -->
+
+            <a
+                href="donor.html"
+                class="register-btn">
+
+                <i class="bi bi-person-plus-fill"></i>
+
+                Register New Donor
+
+            </a>
+
+        </div>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+            <i class="bi bi-search"></i>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search by name, blood group, phone or location..."
+                onkeyup="searchDonors()">
+
+        </div>
+
+
+        <!-- TABLE -->
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Name</th>
+
+                        <th>Age</th>
+
+                        <th>Gender</th>
+
+                        <th>Blood Group</th>
+
+                        <th>Phone</th>
+
+                        <th>Email</th>
+
+                        <th>Address</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="donorTableBody">
+
+                    <tr>
+
+                        <td
+                            colspan="8"
+                            class="loading">
+
+                            <div
+                                class="spinner-border"
+                                role="status">
+                            </div>
+
+                            <div class="mt-2">
+                                Loading donors...
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h4>
+
+        <i class="bi bi-droplet-fill"></i>
+        Hemora
+
+    </h4>
+
+    <p>
+        Blood Donation Management System
+    </p>
+
+    <p>
+        © 2026 Hemora. Every Drop Can Save a Life.
+    </p>
+
+</footer>
+
+
+<script>
+
+
+let allDonors = [];
+
+
+/* LOAD DONORS */
+
+async function loadDonors() {
+
+    try {
+
+        const response =
+            await fetch("/api/donors");
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.success) {
+
+            showError(
+                "Unable to load donors."
+            );
+
+            return;
+
+        }
+
+
+        allDonors =
+            data.donors || [];
+
+
+        displayDonors(allDonors);
+
+
+    } catch (error) {
+
+        console.error(
+            "Donor loading error:",
+            error
+        );
+
+        showError(
+            "Unable to connect to the server."
+        );
+
+    }
+
+}
+
+
+/* DISPLAY DONORS */
+
+function displayDonors(donors) {
+
+    const tableBody =
+        document.getElementById(
+            "donorTableBody"
+        );
+
+
+    if (donors.length === 0) {
+
+        tableBody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="8"
+                    class="empty-message">
+
+                    <i class="bi bi-person-x"></i>
+
+                    <strong>No registered donors found.</strong>
+
+                    <br>
+
+                    <span>
+                        Click "Register New Donor" to add a donor.
+                    </span>
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    tableBody.innerHTML =
+        donors.map(donor => `
+
+            <tr>
+
+                <td>
+
+                    <span class="id-badge">
+                        ${donor.id}
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <strong>
+                        ${escapeHTML(donor.name || "-")}
+                    </strong>
+
+                </td>
+
+
+                <td>
+                    ${donor.age || "-"}
+                </td>
+
+
+                <td>
+                    ${escapeHTML(donor.gender || "-")}
+                </td>
+
+
+                <td>
+
+                    <span class="blood-badge">
+
+                        ${escapeHTML(
+                            donor.blood_group || "-"
+                        )}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+                    ${escapeHTML(donor.phone || "-")}
+                </td>
+
+
+                <td>
+                    ${escapeHTML(donor.email || "-")}
+                </td>
+
+
+                <td>
+                    ${escapeHTML(donor.address || "-")}
+                </td>
+
+            </tr>
+
+        `).join("");
+
+}
+
+
+/* SEARCH */
+
+function searchDonors() {
+
+    const search =
+        document
+            .getElementById("searchInput")
+            .value
+            .toLowerCase()
+            .trim();
+
+
+    if (!search) {
+
+        displayDonors(allDonors);
+
+        return;
+
+    }
+
+
+    const filtered =
+        allDonors.filter(donor => {
+
+            return (
+
+                String(donor.name || "")
+                    .toLowerCase()
+                    .includes(search)
+
+                ||
+
+                String(donor.blood_group || "")
+                    .toLowerCase()
+                    .includes(search)
+
+                ||
+
+                String(donor.phone || "")
+                    .toLowerCase()
+                    .includes(search)
+
+                ||
+
+                String(donor.email || "")
+                    .toLowerCase()
+                    .includes(search)
+
+                ||
+
+                String(donor.address || "")
+                    .toLowerCase()
+                    .includes(search)
+
+            );
+
+        });
+
+
+    displayDonors(filtered);
+
+}
+
+
+/* ERROR */
+
+function showError(message) {
+
+    document.getElementById(
+        "donorTableBody"
+    ).innerHTML = `
+
+        <tr>
+
+            <td
+                colspan="8"
+                class="empty-message">
+
+                <i class="bi bi-exclamation-circle"></i>
+
+                ${message}
+
+            </td>
+
+        </tr>
+
+    `;
+
+}
+
+
+/* SECURITY */
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* LOGOUT */
+
+async function logout() {
+
+    try {
+
+        await fetch(
+            "/api/logout",
+            {
+                method: "POST"
+            }
+        );
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+/* START */
+
+loadDonors();
+
+</script>
+
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+</body>
+
+</html>

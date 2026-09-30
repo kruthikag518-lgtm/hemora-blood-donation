@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hemora | Login</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Poppins", sans-serif;
+            background:
+                radial-gradient(circle at 10% 20%, rgba(255, 100, 130, 0.20), transparent 30%),
+                radial-gradient(circle at 90% 80%, rgba(210, 20, 60, 0.13), transparent 30%),
+                linear-gradient(135deg, #fff7f8, #ffe8ec);
+            overflow-x: hidden;
+        }
+
+        /* ================= BACKGROUND ================= */
+
+        .background {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(205, 25, 60, 0.12);
+            animation: rotateCircle 18s linear infinite;
+        }
+
+        .circle.one {
+            width: 450px;
+            height: 450px;
+            right: -180px;
+            top: 70px;
+        }
+
+        .circle.two {
+            width: 250px;
+            height: 250px;
+            left: -100px;
+            bottom: 30px;
+            animation-duration: 12s;
+        }
+
+        .drop {
+            position: absolute;
+            width: 55px;
+            height: 70px;
+            background: rgba(210, 25, 60, 0.08);
+            border-radius: 60% 60% 65% 65%;
+            transform: rotate(45deg);
+            animation: floatingDrop 8s ease-in-out infinite;
+        }
+
+        .drop:nth-child(3) {
+            left: 8%;
+            top: 20%;
+        }
+
+        .drop:nth-child(4) {
+            right: 15%;
+            top: 18%;
+            width: 80px;
+            height: 100px;
+            animation-delay: 2s;
+        }
+
+        .drop:nth-child(5) {
+            left: 25%;
+            bottom: 8%;
+            width: 40px;
+            height: 52px;
+            animation-delay: 4s;
+        }
+
+        .drop:nth-child(6) {
+            right: 30%;
+            bottom: 10%;
+            width: 50px;
+            height: 65px;
+            animation-delay: 1s;
+        }
+
+        /* ================= MAIN ================= */
+
+        .login-wrapper {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 45px 20px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 1100px;
+            min-height: 650px;
+            display: flex;
+            overflow: hidden;
+
+            background: rgba(255, 255, 255, 0.78);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 35px;
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 35px 100px rgba(100, 10, 35, 0.16);
+
+            animation: cardAppear 0.9s ease forwards;
+        }
+
+        /* ================= LEFT ================= */
+
+        .welcome-section {
+            width: 48%;
+            position: relative;
+            overflow: hidden;
+
+            padding: 65px 55px;
+
+            color: white;
+
+            background:
+                radial-gradient(circle at 80% 15%, rgba(255,255,255,0.16), transparent 25%),
+                linear-gradient(145deg, #9f0c2c, #d51f43 45%, #fa5570);
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .welcome-section::before {
+            content: "";
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.15);
+            right: -160px;
+            top: -100px;
+        }
+
+        .welcome-section::after {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+            left: -100px;
+            bottom: -90px;
+        }
+
+        .logo {
+            position: relative;
+            z-index: 2;
+
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+
+            margin-bottom: 50px;
+        }
+
+        .logo i {
+            margin-right: 8px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        .welcome-section h1 {
+            position: relative;
+            z-index: 2;
+
+            font-size: clamp(2.7rem, 4vw, 4.2rem);
+            line-height: 1.08;
+            font-weight: 800;
+
+            margin-bottom: 20px;
+        }
+
+        .welcome-section h1 span {
+            font-family: "DM Serif Display", serif;
+            font-style: italic;
+            font-weight: 400;
+            color: #ffd1d9;
+        }
+
+        .welcome-section p {
+            position: relative;
+            z-index: 2;
+
+            max-width: 470px;
+
+            font-size: 15px;
+            line-height: 1.9;
+
+            opacity: 0.92;
+        }
+
+        .quote {
+            position: relative;
+            z-index: 2;
+
+            margin-top: 35px;
+            padding: 22px;
+
+            border-left: 4px solid white;
+            border-radius: 0 18px 18px 0;
+
+            background: rgba(255,255,255,0.10);
+
+            backdrop-filter: blur(8px);
+        }
+
+        .quote-icon {
+            font-size: 25px;
+            color: #ffd2da;
+        }
+
+        .quote strong {
+            display: block;
+            margin: 8px 0;
+
+            font-size: 17px;
+        }
+
+        .quote span {
+            font-size: 13px;
+            line-height: 1.7;
+            opacity: 0.88;
+        }
+
+        /* ================= RIGHT ================= */
+
+        .form-section {
+            width: 52%;
+            padding: 65px;
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.62);
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 430px;
+            margin: auto;
+        }
+
+        .mini-label {
+            display: inline-block;
+
+            color: #d51f43;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+
+            margin-bottom: 10px;
+        }
+
+        .form-container h2 {
+            color: #42101c;
+
+            font-size: 38px;
+            font-weight: 800;
+
+            margin-bottom: 8px;
+        }
+
+        .form-container h2 span {
+            font-family: "DM Serif Display", serif;
+            font-style: italic;
+            color: #d51f43;
+            font-weight: 400;
+        }
+
+        .subtitle {
+            color: #80656e;
+            margin-bottom: 32px;
+        }
+
+        .form-label {
+            color: #4b3038;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .input-group {
+            margin-bottom: 22px;
+            border-radius: 14px;
+        }
+
+        .input-group-text {
+            min-width: 48px;
+            justify-content: center;
+
+            background: #fff;
+            color: #d51f43;
+
+            border: 1px solid #ead7db;
+            border-right: none;
+
+            border-radius: 14px 0 0 14px;
+        }
+
+        .form-control {
+            min-height: 52px;
+
+            background: rgba(255,255,255,0.85);
+
+            border: 1px solid #ead7db;
+            border-left: none;
+
+            padding: 12px;
+
+            font-size: 14px;
+
+            border-radius: 0 14px 14px 0;
+
+            transition: 0.3s;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 4px rgba(213,31,67,0.08);
+            border-color: #d51f43;
+        }
+
+        .input-group:focus-within .input-group-text {
+            border-color: #d51f43;
+        }
+
+        .password-toggle {
+            border: 1px solid #ead7db !important;
+            border-left: none !important;
+
+            background: white !important;
+            color: #d51f43 !important;
+
+            border-radius: 0 14px 14px 0 !important;
+        }
+
+        /* ================= LOGIN BUTTON ================= */
+
+        .login-btn {
+            width: 100%;
+
+            min-height: 54px;
+
+            margin-top: 5px;
+
+            border: none;
+            border-radius: 15px;
+
+            background:
+                linear-gradient(135deg, #bd1236, #ef4665);
+
+            color: white;
+
+            font-size: 15px;
+            font-weight: 700;
+
+            box-shadow:
+                0 12px 30px rgba(189,18,54,0.22);
+
+            transition: 0.35s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 18px 40px rgba(189,18,54,0.32);
+        }
+
+        .login-btn i {
+            margin-right: 7px;
+        }
+
+        /* ================= MESSAGE ================= */
+
+        .message {
+            display: none;
+
+            padding: 13px 15px;
+            margin-bottom: 20px;
+
+            border-radius: 12px;
+
+            font-size: 13px;
+        }
+
+        .message.success {
+            display: block;
+            background: #e0f4e9;
+            color: #17653b;
+            border: 1px solid #bde4cd;
+        }
+
+        .message.error {
+            display: block;
+            background: #fde5e8;
+            color: #8e2033;
+            border: 1px solid #f3c4cb;
+        }
+
+        /* ================= LINKS ================= */
+
+        .register-link {
+            text-align: center;
+            margin-top: 25px;
+            color: #80656e;
+            font-size: 14px;
+        }
+
+        .register-link a {
+            color: #c51635;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        .back-home {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+
+            margin-top: 18px;
+
+            color: #9a7f87;
+            text-decoration: none;
+            font-size: 13px;
+
+            transition: 0.3s;
+        }
+
+        .back-home:hover {
+            color: #c51635;
+        }
+
+        /* ================= ANIMATIONS ================= */
+
+        @keyframes cardAppear {
+
+            from {
+                opacity: 0;
+                transform: translateY(35px) scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+
+        }
+
+        @keyframes floatingDrop {
+
+            0%, 100% {
+                transform: translateY(0) rotate(45deg);
+            }
+
+            50% {
+                transform: translateY(-35px) rotate(55deg);
+            }
+
+        }
+
+        @keyframes rotateCircle {
+
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+        @keyframes heartbeat {
+
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            15% {
+                transform: scale(1.15);
+            }
+
+            30% {
+                transform: scale(1);
+            }
+
+            45% {
+                transform: scale(1.12);
+            }
+
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 900px) {
+
+            .login-card {
+                flex-direction: column;
+            }
+
+            .welcome-section,
+            .form-section {
+                width: 100%;
+            }
+
+            .welcome-section {
+                padding: 45px 35px;
+            }
+
+            .form-section {
+                padding: 45px 35px;
+            }
+
+            .logo {
+                margin-bottom: 30px;
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .login-wrapper {
+                padding: 20px 12px;
+            }
+
+            .login-card {
+                border-radius: 25px;
+            }
+
+            .welcome-section {
+                padding: 35px 25px;
+            }
+
+            .form-section {
+                padding: 35px 22px;
+            }
+
+            .welcome-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .form-container h2 {
+                font-size: 30px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Animated Background -->
+
+    <div class="background">
+
+        <div class="circle one"></div>
+        <div class="circle two"></div>
+
+        <div class="drop"></div>
+        <div class="drop"></div>
+        <div class="drop"></div>
+        <div class="drop"></div>
+
+    </div>
+
+
+    <!-- LOGIN -->
+
+    <div class="login-wrapper">
+
+        <div class="login-card">
+
+            <!-- LEFT SIDE -->
+
+            <div class="welcome-section">
+
+                <div class="logo">
+                    <i class="bi bi-droplet-fill"></i>
+                    Hemora
+                </div>
+
+                <h1>
+                    Welcome
+                    <br>
+                    <span>Back.</span>
+                </h1>
+
+                <p>
+                    Every donation carries hope. Login to your Hemora
+                    account and continue being part of a community that
+                    connects people with the blood they need.
+                </p>
+
+                <div class="quote">
+
+                    <i class="bi bi-quote quote-icon"></i>
+
+                    <strong>
+                        Every Drop Matters
+                    </strong>
+
+                    <span>
+                        "A little kindness can become someone's
+                        greatest hope."
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+
+            <div class="form-section">
+
+                <div class="form-container">
+
+                    <span class="mini-label">
+                        LIFEDROP ACCOUNT
+                    </span>
+
+                    <h2>
+                        Sign <span>In</span>
+                    </h2>
+
+                    <p class="subtitle">
+                        Welcome back! Please enter your details.
+                    </p>
+
+
+                    <div id="message" class="message"></div>
+
+
+                    <form id="loginForm">
+
+                        <!-- USERNAME -->
+
+                        <label class="form-label">
+                            Username
+                        </label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                <i class="bi bi-person-fill"></i>
+                            </span>
+
+                            <input
+                                type="text"
+                                id="username"
+                                class="form-control"
+                                placeholder="Enter your username"
+                                autocomplete="username"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- PASSWORD -->
+
+                        <label class="form-label">
+                            Password
+                        </label>
+
+                        <div class="input-group">
+
+                            <span class="input-group-text">
+                                <i class="bi bi-lock-fill"></i>
+                            </span>
+
+                            <input
+                                type="password"
+                                id="password"
+                                class="form-control"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="btn password-toggle"
+                                onclick="togglePassword()">
+
+                                <i
+                                    id="eyeIcon"
+                                    class="bi bi-eye">
+                                </i>
+
+                            </button>
+
+                        </div>
+
+
+                        <!-- LOGIN -->
+
+                        <button
+                            type="submit"
+                            class="login-btn">
+
+                            <i class="bi bi-box-arrow-in-right"></i>
+
+                            Login to Hemora
+
+                        </button>
+
+                    </form>
+
+
+                    <!-- REGISTER -->
+
+                    <div class="register-link">
+
+                        Don't have an account?
+
+                        <a href="register.html">
+                            Create Account
+                        </a>
+
+                    </div>
+
+
+                    <!-- HOME -->
+
+                    <a
+                        href="index.html"
+                        class="back-home">
+
+                        <i class="bi bi-arrow-left"></i>
+
+                        Back to Hemora Home
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- LOGIN JAVASCRIPT -->
+
+    <script>
+
+        function togglePassword() {
+
+            const password =
+                document.getElementById("password");
+
+            const eyeIcon =
+                document.getElementById("eyeIcon");
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                eyeIcon.className =
+                    "bi bi-eye-slash";
+
+            } else {
+
+                password.type = "password";
+
+                eyeIcon.className =
+                    "bi bi-eye";
+
+            }
+
+        }
+
+
+        document
+            .getElementById("loginForm")
+            .addEventListener("submit", async function(event) {
+
+                event.preventDefault();
+
+                const message =
+                    document.getElementById("message");
+
+                const username =
+                    document
+                        .getElementById("username")
+                        .value
+                        .trim();
+
+                const password =
+                    document
+                        .getElementById("password")
+                        .value;
+
+
+                message.className = "message";
+                message.style.display = "none";
+
+
+                try {
+
+                    const response =
+                        await fetch("/api/login", {
+
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+
+                            body: JSON.stringify({
+
+                                username: username,
+                                password: password
+
+                            })
+
+                        });
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (data.success) {
+
+                        message.textContent =
+                            "Login successful! Redirecting to dashboard...";
+
+                        message.className =
+                            "message success";
+
+
+                        setTimeout(function() {
+
+                            window.location.href =
+                                "dashboard.html";
+
+                        }, 1000);
+
+
+                    } else {
+
+                        message.textContent =
+                            data.message ||
+                            "Invalid username or password.";
+
+                        message.className =
+                            "message error";
+
+                    }
+
+
+                } catch (error) {
+
+                    console.error(error);
+
+                    message.textContent =
+                        "Unable to connect to server. Please make sure Node.js server is running.";
+
+                    message.className =
+                        "message error";
+
+                }
+
+            });
+
+    </script>
+
+</body>
+
+</html>

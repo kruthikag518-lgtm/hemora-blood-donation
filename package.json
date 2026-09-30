@@ -1,0 +1,25 @@
+{
+  "name": "blood-donation-system",
+  "version": "1.0.0",
+  "description": "Hemora Blood Donation Management System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "blood",
+    "donation",
+    "management",
+    "hemora"
+  ],
+  "author": "Kruthika",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^18.0.4",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "mysql2": "^3.24.5"
+  }
+}

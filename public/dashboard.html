@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hemora | Dashboard</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: #fff7f8;
+            color: #35151d;
+            overflow-x: hidden;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            padding: 17px 5%;
+
+            background: rgba(255, 255, 255, 0.90);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(200, 20, 60, 0.08);
+
+            box-shadow: 0 5px 25px rgba(100, 10, 30, 0.05);
+        }
+
+        .navbar-brand {
+            color: #c9184a !important;
+            font-size: 25px;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .navbar-brand i {
+            margin-right: 7px;
+        }
+
+        .nav-link {
+            color: #4b3038 !important;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0 7px;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #c9184a !important;
+        }
+
+        .logout-btn {
+            border: none;
+            background: #c9184a;
+            color: white;
+
+            padding: 9px 18px;
+            border-radius: 10px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #a90f39;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(201, 24, 74, 0.25);
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+
+            min-height: 540px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 80px 8%;
+
+            background:
+                radial-gradient(
+                    circle at 85% 20%,
+                    rgba(255, 150, 170, 0.25),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    135deg,
+                    #fff4f6,
+                    #ffe1e7
+                );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+
+            max-width: 750px;
+
+            animation: heroAppear 1s ease;
+        }
+
+        .welcome {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 9px 15px;
+
+            border-radius: 30px;
+
+            background: white;
+            color: #c9184a;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            box-shadow: 0 8px 25px rgba(150, 20, 50, 0.08);
+
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 6vw, 70px);
+            line-height: 1.05;
+            font-weight: 800;
+
+            color: #35151d;
+
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            display: block;
+
+            font-family: "DM Serif Display", serif;
+            font-style: italic;
+            font-weight: 400;
+
+            color: #c9184a;
+        }
+
+        .hero p {
+            max-width: 680px;
+
+            color: #765b64;
+
+            font-size: 16px;
+            line-height: 1.9;
+
+            margin-bottom: 30px;
+        }
+
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+
+            padding: 14px 23px;
+
+            border-radius: 13px;
+
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+
+            transition: 0.3s;
+        }
+
+        .primary-btn {
+            color: white;
+            background: linear-gradient(135deg, #bd1236, #ef4665);
+
+            box-shadow: 0 12px 28px rgba(189, 18, 54, 0.23);
+        }
+
+        .primary-btn:hover {
+            color: white;
+            transform: translateY(-4px);
+            box-shadow: 0 17px 35px rgba(189, 18, 54, 0.3);
+        }
+
+        .secondary-btn {
+            margin-left: 10px;
+
+            color: #c9184a;
+            background: white;
+
+            border: 1px solid #f0cdd4;
+        }
+
+        .secondary-btn:hover {
+            color: #c9184a;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(120, 10, 40, 0.08);
+        }
+
+        /* ================= FLOATING DROPS ================= */
+
+        .drop {
+            position: absolute;
+
+            border-radius: 60% 60% 65% 65%;
+
+            background: rgba(201, 24, 74, 0.08);
+
+            transform: rotate(45deg);
+
+            animation: floating 8s ease-in-out infinite;
+        }
+
+        .drop.one {
+            width: 110px;
+            height: 140px;
+
+            right: 13%;
+            top: 20%;
+        }
+
+        .drop.two {
+            width: 65px;
+            height: 80px;
+
+            right: 32%;
+            bottom: 15%;
+
+            animation-delay: 2s;
+        }
+
+        .drop.three {
+            width: 45px;
+            height: 58px;
+
+            left: 7%;
+            bottom: 12%;
+
+            animation-delay: 4s;
+        }
+
+        .drop.four {
+            width: 30px;
+            height: 40px;
+
+            right: 7%;
+            bottom: 25%;
+
+            animation-delay: 1s;
+        }
+
+        /* ================= STATS ================= */
+
+        .stats {
+            position: relative;
+            z-index: 10;
+
+            margin-top: -45px;
+
+            padding: 0 7%;
+        }
+
+        .stat-card {
+            text-align: center;
+
+            padding: 30px 20px;
+
+            border-radius: 20px;
+
+            background: rgba(255,255,255,0.92);
+
+            border: 1px solid rgba(220, 40, 80, 0.08);
+
+            box-shadow: 0 15px 40px rgba(100, 10, 30, 0.08);
+
+            transition: 0.35s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 20px 45px rgba(100, 10, 30, 0.12);
+        }
+
+        .stat-icon {
+            width: 55px;
+            height: 55px;
+
+            margin: 0 auto 13px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 16px;
+
+            background: #fff0f3;
+            color: #c9184a;
+
+            font-size: 22px;
+        }
+
+        .stat-card h3 {
+            color: #c9184a;
+            font-size: 28px;
+            font-weight: 800;
+
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            color: #80656e;
+            margin: 0;
+
+            font-size: 13px;
+        }
+
+        /* ================= SECTION ================= */
+
+        .section {
+            padding: 90px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 35px;
+            font-weight: 800;
+
+            color: #35151d;
+        }
+
+        .section-title h2::after {
+            content: "";
+
+            display: block;
+
+            width: 55px;
+            height: 4px;
+
+            margin: 15px auto 0;
+
+            border-radius: 10px;
+
+            background: #c9184a;
+        }
+
+        .section-title p {
+            color: #80656e;
+            margin-top: 15px;
+        }
+
+        /* ================= ACTION CARDS ================= */
+
+        .action-card {
+            height: 100%;
+
+            padding: 30px;
+
+            border-radius: 22px;
+
+            background: white;
+
+            border: 1px solid rgba(200, 20, 60, 0.08);
+
+            box-shadow: 0 12px 35px rgba(80, 10, 30, 0.06);
+
+            transition: 0.35s;
+        }
+
+        .action-card:hover {
+            transform: translateY(-8px);
+
+            box-shadow:
+                0 22px 50px rgba(100, 10, 30, 0.12);
+        }
+
+        .action-icon {
+            width: 58px;
+            height: 58px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 17px;
+
+            background: linear-gradient(
+                135deg,
+                #fff0f3,
+                #ffe0e6
+            );
+
+            color: #c9184a;
+
+            font-size: 23px;
+
+            margin-bottom: 22px;
+        }
+
+        .action-card h4 {
+            color: #35151d;
+
+            font-size: 19px;
+            font-weight: 700;
+
+            margin-bottom: 12px;
+        }
+
+        .action-card p {
+            color: #80656e;
+
+            font-size: 13px;
+            line-height: 1.75;
+
+            min-height: 72px;
+
+            margin-bottom: 20px;
+        }
+
+        .action-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            color: #c9184a;
+
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            transition: 0.3s;
+        }
+
+        .action-link:hover {
+            color: #9f0c2c;
+            gap: 11px;
+        }
+
+        /* ================= DONOR COMMUNITY ================= */
+
+        .donor-section {
+            margin: 0 7% 80px;
+
+            padding: 55px;
+
+            border-radius: 28px;
+
+            background:
+                radial-gradient(
+                    circle at 90% 20%,
+                    rgba(255,255,255,0.15),
+                    transparent 25%
+                ),
+                linear-gradient(
+                    135deg,
+                    #9f0c2c,
+                    #c9184a,
+                    #ef4665
+                );
+
+            color: white;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .donor-section::before {
+            content: "";
+
+            position: absolute;
+
+            width: 280px;
+            height: 280px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(255,255,255,0.15);
+
+            right: -100px;
+            top: -100px;
+        }
+
+        .donor-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .donor-section h2 {
+            font-size: 34px;
+            font-weight: 800;
+        }
+
+        .donor-section p {
+            max-width: 650px;
+
+            line-height: 1.8;
+
+            opacity: 0.9;
+        }
+
+        .donor-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            margin-top: 12px;
+
+            padding: 13px 23px;
+
+            border-radius: 12px;
+
+            background: white;
+            color: #c9184a;
+
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            transition: 0.3s;
+        }
+
+        .donor-btn:hover {
+            color: #c9184a;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+
+        /* ================= MOTIVATION ================= */
+
+        .motivation {
+            margin: 0 7% 70px;
+
+            padding: 60px 30px;
+
+            border-radius: 28px;
+
+            text-align: center;
+
+            background: #fff;
+
+            border: 1px solid #f2d9de;
+
+            box-shadow: 0 15px 40px rgba(100, 10, 30, 0.06);
+        }
+
+        .motivation h2 {
+            color: #35151d;
+
+            font-size: 34px;
+            font-weight: 800;
+        }
+
+        .motivation p {
+            max-width: 700px;
+
+            margin: 15px auto 25px;
+
+            color: #80656e;
+
+            line-height: 1.8;
+        }
+
+        .motivation a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 13px 24px;
+
+            border-radius: 12px;
+
+            background: linear-gradient(
+                135deg,
+                #bd1236,
+                #ef4665
+            );
+
+            color: white;
+
+            text-decoration: none;
+
+            font-weight: 700;
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+        .motivation a:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            padding: 40px 20px;
+
+            text-align: center;
+
+            background: #24171a;
+            color: white;
+        }
+
+        footer h4 {
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        footer h4 i {
+            color: #ff4d6d;
+        }
+
+        footer p {
+            color: #bbaeb1;
+
+            font-size: 13px;
+
+            margin: 6px 0;
+        }
+
+        /* ================= ANIMATIONS ================= */
+
+        @keyframes heroAppear {
+
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        @keyframes floating {
+
+            0%, 100% {
+                transform: translateY(0) rotate(45deg);
+            }
+
+            50% {
+                transform: translateY(-30px) rotate(55deg);
+            }
+
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 992px) {
+
+            .hero {
+                padding: 70px 7%;
+            }
+
+            .stats {
+                margin-top: 30px;
+            }
+
+            .donor-section {
+                margin-left: 5%;
+                margin-right: 5%;
+            }
+
+            .motivation {
+                margin-left: 5%;
+                margin-right: 5%;
+            }
+
+        }
+
+        @media (max-width: 768px) {
+
+            .navbar {
+                padding: 15px 5%;
+            }
+
+            .hero {
+                min-height: 500px;
+                padding: 60px 7%;
+            }
+
+            .hero h1 {
+                font-size: 43px;
+            }
+
+            .secondary-btn {
+                margin-left: 0;
+                margin-top: 12px;
+            }
+
+            .stats {
+                padding: 0 5%;
+            }
+
+            .section {
+                padding: 70px 5%;
+            }
+
+            .section-title h2 {
+                font-size: 29px;
+            }
+
+            .donor-section {
+                padding: 40px 25px;
+            }
+
+            .donor-section h2 {
+                font-size: 28px;
+            }
+
+            .motivation {
+                padding: 45px 20px;
+            }
+
+            .motivation h2 {
+                font-size: 27px;
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .hero h1 {
+                font-size: 37px;
+            }
+
+            .hero p {
+                font-size: 14px;
+            }
+
+            .hero-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .stat-card {
+                padding: 25px 15px;
+            }
+
+            .action-card {
+                padding: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar navbar-expand-lg">
+
+    <div class="container-fluid">
+
+        <a
+            class="navbar-brand"
+            href="dashboard.html">
+
+            <i class="bi bi-droplet-fill"></i>
+            Hemora
+
+        </a>
+
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarMenu">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <div
+            class="collapse navbar-collapse"
+            id="navbarMenu">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="dashboard.html">
+
+                        Dashboard
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="availability.html">
+
+                        Availability
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="request.html">
+
+                        Request Blood
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="donors.html">
+
+                        Registered Donors
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="history.html">
+
+                        History
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+
+                    <button
+                        class="logout-btn"
+                        onclick="logout()">
+
+                        <i class="bi bi-box-arrow-right"></i>
+
+                        Logout
+
+                    </button>
+
+                </li>
+
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="drop one"></div>
+    <div class="drop two"></div>
+    <div class="drop three"></div>
+    <div class="drop four"></div>
+
+
+    <div class="hero-content">
+
+
+        <div class="welcome">
+
+            <i class="bi bi-heart-fill"></i>
+
+            Welcome back,
+            <span id="userName">User</span>!
+
+        </div>
+
+
+        <h1>
+
+            Together We Can
+
+            <span>
+                Save Lives.
+            </span>
+
+        </h1>
+
+
+        <p>
+
+            Welcome to your Hemora dashboard.
+            Manage your blood donations, check blood
+            availability, request blood and view your
+            request history — all in one place.
+
+        </p>
+
+
+        <a
+            href="availability.html"
+            class="hero-btn primary-btn">
+
+            <i class="bi bi-droplet-fill"></i>
+
+            Check Blood Availability
+
+        </a>
+
+
+        <a
+            href="request.html"
+            class="hero-btn secondary-btn">
+
+            <i class="bi bi-plus-circle"></i>
+
+            Request Blood
+
+        </a>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= STATS ================= -->
+
+<section class="stats">
+
+    <div class="container-fluid">
+
+        <div class="row g-4">
+
+
+            <div class="col-md-4">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-droplet-fill"></i>
+
+                    </div>
+
+                    <h3>
+                        8
+                    </h3>
+
+                    <p>
+                        Blood Groups Available
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-heart-pulse-fill"></i>
+
+                    </div>
+
+                    <h3>
+                        24/7
+                    </h3>
+
+                    <p>
+                        Hemora Support
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-people-fill"></i>
+
+                    </div>
+
+                    <h3>
+                        1000+
+                    </h3>
+
+                    <p>
+                        Lives We Aim to Help
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= ACTIONS ================= -->
+
+<section class="section">
+
+
+    <div class="section-title">
+
+        <h2>
+            What Would You Like To Do?
+        </h2>
+
+        <p>
+            Choose an action to continue using Hemora.
+        </p>
+
+    </div>
+
+
+    <div class="container-fluid">
+
+        <div class="row g-4">
+
+
+            <!-- BLOOD AVAILABILITY -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="action-card">
+
+                    <div class="action-icon">
+
+                        <i class="bi bi-search-heart"></i>
+
+                    </div>
+
+
+                    <h4>
+                        Blood Availability
+                    </h4>
+
+
+                    <p>
+
+                        Check the available blood groups
+                        and units currently stored in
+                        the blood bank.
+
+                    </p>
+
+
+                    <a
+                        href="availability.html"
+                        class="action-link">
+
+                        Check Now
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- REQUEST BLOOD -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="action-card">
+
+                    <div class="action-icon">
+
+                        <i class="bi bi-file-earmark-medical"></i>
+
+                    </div>
+
+
+                    <h4>
+                        Request Blood
+                    </h4>
+
+
+                    <p>
+
+                        Submit a blood request for
+                        a patient who needs urgent
+                        blood support.
+
+                    </p>
+
+
+                    <a
+                        href="request.html"
+                        class="action-link">
+
+                        Request Now
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- HISTORY -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="action-card">
+
+                    <div class="action-icon">
+
+                        <i class="bi bi-clock-history"></i>
+
+                    </div>
+
+
+                    <h4>
+                        Request History
+                    </h4>
+
+
+                    <p>
+
+                        View your previous blood
+                        requests and check their
+                        current status.
+
+                    </p>
+
+
+                    <a
+                        href="history.html"
+                        class="action-link">
+
+                        View History
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- BECOME A DONOR -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="action-card">
+
+                    <div class="action-icon">
+
+                        <i class="bi bi-heart-fill"></i>
+
+                    </div>
+
+
+                    <h4>
+                        Become a Donor
+                    </h4>
+
+
+                    <p>
+
+                        Register yourself as a
+                        blood donor and help
+                        someone in need.
+
+                    </p>
+
+
+                    <!-- IMPORTANT:
+                         This goes to DONOR REGISTRATION -->
+
+                    <a
+                        href="donor.html"
+                        class="action-link">
+
+                        Get Started
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= REGISTERED DONORS ================= -->
+
+<section class="donor-section">
+
+    <div class="donor-content">
+
+        <h2>
+            Our Donor Community
+        </h2>
+
+        <p>
+
+            Every registered donor can become
+            someone's hope. View the donors
+            who have joined the Hemora community
+            and made themselves available to help.
+
+        </p>
+
+
+        <a
+            href="donors.html"
+            class="donor-btn">
+
+            <i class="bi bi-people-fill"></i>
+
+            View Registered Donors
+
+            <i class="bi bi-arrow-right"></i>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= MOTIVATION ================= -->
+
+<section class="motivation">
+
+    <h2>
+        Be Someone's Reason to Smile ❤️
+    </h2>
+
+
+    <p>
+
+        A single blood donation can make
+        a meaningful difference. Together,
+        let's build a community where blood
+        is available when someone needs it most.
+
+    </p>
+
+
+    <a href="donor.html">
+
+        <i class="bi bi-heart-fill"></i>
+
+        Become a Donor
+
+    </a>
+
+</section>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <h4>
+
+        <i class="bi bi-droplet-fill"></i>
+
+        Hemora
+
+    </h4>
+
+
+    <p>
+        Blood Donation Management System
+    </p>
+
+
+    <p>
+        © 2026 Hemora.
+        Every Drop Can Save a Life.
+    </p>
+
+</footer>
+
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+
+async function loadUser() {
+
+    try {
+
+        const response =
+            await fetch("/api/user");
+
+
+        if (!response.ok) {
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            data.success &&
+            data.user
+        ) {
+
+            document
+                .getElementById("userName")
+                .textContent =
+                data.user.name;
+
+        } else {
+
+            window.location.href =
+                "login.html";
+
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            "User loading error:",
+            error
+        );
+
+        window.location.href =
+            "login.html";
+
+    }
+
+}
+
+
+
+async function logout() {
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/logout",
+                {
+                    method: "POST"
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (data.success) {
+
+            window.location.href =
+                "login.html";
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Logout error:",
+            error
+        );
+
+        window.location.href =
+            "login.html";
+
+    }
+
+}
+
+
+
+loadUser();
+
+</script>
+
+
+
+<!-- Bootstrap JavaScript -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+</body>
+
+</html>

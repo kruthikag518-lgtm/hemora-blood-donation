@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Hemora | Request History</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: #fff7f8;
+        color: #292929;
+    }
+
+    .navbar {
+        background: linear-gradient(90deg, #c9184a, #ff4d6d);
+        padding: 15px 5%;
+        box-shadow: 0 5px 20px rgba(150, 20, 40, .15);
+    }
+
+    .navbar-brand {
+        color: white !important;
+        font-size: 25px;
+        font-weight: 800;
+    }
+
+    .nav-link {
+        color: white !important;
+        font-weight: 500;
+        margin: 0 7px;
+    }
+
+    .logout-btn {
+        border: 1px solid white;
+        color: white;
+        border-radius: 20px;
+        padding: 7px 18px;
+        background: transparent;
+        font-weight: 600;
+    }
+
+    .logout-btn:hover {
+        background: white;
+        color: #c9184a;
+    }
+
+    .hero {
+        padding: 60px 7%;
+        text-align: center;
+        background: linear-gradient(135deg, #fff0f3, #ffe0e6);
+    }
+
+    .hero-icon {
+        font-size: 55px;
+        color: #c9184a;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.12);
+        }
+    }
+
+    .hero h1 {
+        font-size: 42px;
+        font-weight: 800;
+        color: #c9184a;
+        margin-top: 10px;
+    }
+
+    .hero p {
+        color: #666;
+        max-width: 700px;
+        margin: 15px auto;
+    }
+
+    .history-section {
+        padding: 60px 6%;
+    }
+
+    .history-card {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 15px 45px rgba(100, 20, 30, .09);
+        overflow-x: auto;
+    }
+
+    .history-title {
+        margin-bottom: 25px;
+    }
+
+    .history-title h2 {
+        font-weight: 800;
+    }
+
+    .history-title p {
+        color: #777;
+    }
+
+    table {
+        min-width: 900px;
+    }
+
+    thead {
+        background: #c9184a;
+        color: white;
+    }
+
+    th {
+        padding: 15px !important;
+        white-space: nowrap;
+    }
+
+    td {
+        padding: 15px !important;
+        vertical-align: middle;
+    }
+
+    tbody tr:hover {
+        background: #fff5f7;
+    }
+
+    .status {
+        display: inline-block;
+        padding: 6px 14px;
+        border-radius: 20px;
+        background: #fff3cd;
+        color: #856404;
+        font-weight: 600;
+        font-size: 13px;
+    }
+
+    .blood-badge {
+        display: inline-block;
+        background: #ffe0e6;
+        color: #c9184a;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-weight: 700;
+    }
+
+    .empty-box {
+        text-align: center;
+        padding: 60px 20px;
+        color: #777;
+    }
+
+    .empty-box i {
+        font-size: 60px;
+        color: #ff8fa3;
+    }
+
+    .message {
+        display: none;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .message.error {
+        display: block;
+        background: #f8d7da;
+        color: #842029;
+    }
+
+    footer {
+        background: #24171a;
+        color: white;
+        text-align: center;
+        padding: 35px 20px;
+    }
+
+    footer h4 {
+        font-weight: 800;
+    }
+
+    footer p {
+        color: #bbb;
+        margin: 7px 0;
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+
+```
+    <a class="navbar-brand" href="dashboard.html">
+        <i class="bi bi-droplet-fill"></i>
+        Hemora
+    </a>
+
+    <button
+        class="navbar-toggler bg-light"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#menu">
+
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="menu">
+
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+
+            <li class="nav-item">
+                <a class="nav-link" href="dashboard.html">
+                    Dashboard
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="availability.html">
+                    Availability
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="request.html">
+                    Request Blood
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="history.html">
+                    History
+                </a>
+            </li>
+
+            <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+                <button class="logout-btn" onclick="logout()">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Logout
+                </button>
+            </li>
+
+        </ul>
+
+    </div>
+</div>
+```
+
+</nav>
+
+<section class="hero">
+
+```
+<div class="hero-icon">
+    <i class="bi bi-clock-history"></i>
+</div>
+
+<h1>Request History</h1>
+
+<p>
+    View all your previous blood requests saved in the Hemora database.
+</p>
+```
+
+</section>
+
+<section class="history-section">
+
+```
+<div class="history-card">
+
+    <div class="history-title">
+
+        <h2>
+            <i class="bi bi-file-medical"></i>
+            My Blood Requests
+        </h2>
+
+        <p>
+            Your submitted blood requests are displayed below.
+        </p>
+
+    </div>
+
+    <div id="message" class="message"></div>
+
+    <div id="historyContainer">
+
+        <div class="empty-box">
+
+            <div class="spinner-border text-danger"></div>
+
+            <p class="mt-3">
+                Loading your request history...
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+```
+
+</section>
+
+<footer>
+
+```
+<h4>
+    <i class="bi bi-droplet-fill"></i>
+    Hemora
+</h4>
+
+<p>
+    Blood Donation Management System
+</p>
+
+<p>
+    © 2026 Hemora. Every Drop Can Save a Life.
+</p>
+```
+
+</footer>
+
+<script>
+
+async function loadHistory() {
+
+    const container = document.getElementById("historyContainer");
+    const message = document.getElementById("message");
+
+    try {
+
+        const response = await fetch("/api/history");
+
+        const data = await response.json();
+
+        console.log("History API response:", data);
+
+        if (!response.ok || !data.success) {
+
+            if (response.status === 401) {
+                window.location.href = "login.html";
+                return;
+            }
+
+            throw new Error(
+                data.message || "Unable to load history."
+            );
+        }
+
+
+        /*
+         IMPORTANT:
+
+         Backend returns:
+
+         data.requests
+
+         NOT:
+
+         data.history
+        */
+
+        const requests = data.requests || [];
+
+
+        if (requests.length === 0) {
+
+            container.innerHTML = `
+                <div class="empty-box">
+
+                    <i class="bi bi-inbox"></i>
+
+                    <h4 class="mt-3">
+                        No Blood Requests Yet
+                    </h4>
+
+                    <p>
+                        You haven't submitted any blood requests.
+                    </p>
+
+                    <a href="request.html"
+                       class="btn btn-danger mt-2">
+
+                        <i class="bi bi-plus-circle"></i>
+                        Request Blood
+
+                    </a>
+
+                </div>
+            `;
+
+            return;
+        }
+
+
+        let tableHTML = `
+
+            <div class="table-responsive">
+
+                <table class="table align-middle">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Patient Name</th>
+                            <th>Blood Group</th>
+                            <th>Units</th>
+                            <th>Hospital</th>
+                            <th>Contact</th>
+                            <th>Status</th>
+                            <th>Request Date</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+        `;
+
+
+        requests.forEach(request => {
+
+            const date = new Date(request.request_date);
+
+            const formattedDate =
+                date.toLocaleString("en-IN", {
+                    dateStyle: "medium",
+                    timeStyle: "short"
+                });
+
+
+            tableHTML += `
+
+                <tr>
+
+                    <td>
+                        <strong>#${request.id}</strong>
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${request.patient_name}
+                        </strong>
+                    </td>
+
+                    <td>
+
+                        <span class="blood-badge">
+                            ${request.blood_group}
+                        </span>
+
+                    </td>
+
+                    <td>
+                        ${request.units}
+                    </td>
+
+                    <td>
+                        ${request.hospital || "-"}
+                    </td>
+
+                    <td>
+                        ${request.contact || "-"}
+                    </td>
+
+                    <td>
+
+                        <span class="status">
+                            ${request.status}
+                        </span>
+
+                    </td>
+
+                    <td>
+                        ${formattedDate}
+                    </td>
+
+                </tr>
+
+            `;
+
+        });
+
+
+        tableHTML += `
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        `;
+
+
+        container.innerHTML = tableHTML;
+
+    }
+
+
+    catch (error) {
+
+        console.error(
+            "History loading error:",
+            error
+        );
+
+        message.textContent =
+            "Unable to load request history. Please make sure Node.js is running.";
+
+        message.className =
+            "message error";
+
+        container.innerHTML = "";
+
+    }
+
+}
+
+
+/* Logout */
+
+async function logout() {
+
+    try {
+
+        const response = await fetch(
+            "/api/logout",
+            {
+                method: "POST"
+            }
+        );
+
+        const data = await response.json();
+
+        if (data.success) {
+
+            window.location.href =
+                "login.html";
+
+        }
+
+    }
+
+    catch (error) {
+
+        window.location.href =
+            "login.html";
+
+    }
+
+}
+
+
+/* Load history when page opens */
+
+loadHistory();
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
